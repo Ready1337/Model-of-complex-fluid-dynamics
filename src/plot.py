@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 
 
-def show(x_coords, y_coords):
+def plot_sequence(x_coords, y_coords):
+    plt.subplot()
     plt.plot(x_coords, y_coords)
 
-    plt.xlabel('x')
-    plt.ylabel('y')
 
+def show_sequence():
     plt.show()
