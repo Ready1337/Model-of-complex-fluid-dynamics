@@ -33,7 +33,7 @@ def eulers_model(x0, y0, precision):
 
 
 def runge_kutta_model(x0, y0, precision):
-    param = 1.0
+    param = 1.0  # do not forget to change the param before starting
     k1 = precision * y0
     l1 = precision * (-(x0**2) + 3*x0 - 2) * y0 - 4*x0 + 4*param
 
