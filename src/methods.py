@@ -1,11 +1,17 @@
-def eulers_example(x0, y0, precision):
+def eulers_example(point, precision):
+    x0 = point[0]
+    y0 = point[1]
+
     x = x0 + precision * y0
     y = y0 + precision * (-x0)
 
     return x, y
 
 
-def runge_kutta_example(x0, y0, precision):
+def runge_kutta_example(point, precision):
+    x0 = point[0]
+    y0 = point[1]
+
     k1 = precision * y0
     l1 = precision * (-x0)
 
@@ -24,16 +30,20 @@ def runge_kutta_example(x0, y0, precision):
     return x, y
 
 
-def eulers_model(x0, y0, precision):
-    param = 1.0
+def eulers_model(point, precision, param):
+    x0 = point[0]
+    y0 = point[1]
+
     x = x0 + precision * y0
     y = y0 + precision * (-(x0**2) + 3*x0 - 2) * y0 - 4*x0 + 4*param
 
     return x, y
 
 
-def runge_kutta_model(x0, y0, precision):
-    param = 1.0  # do not forget to change the param before starting
+def runge_kutta_model(point, precision, param):
+    x0 = point[0]
+    y0 = point[1]
+
     k1 = precision * y0
     l1 = precision * (-(x0**2) + 3*x0 - 2) * y0 - 4*x0 + 4*param
 
