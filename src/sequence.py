@@ -12,7 +12,7 @@ def calculate_sequences(sequence_setter):
         x_coords = [start[j][0]]
         y_coords = [start[j][1]]
 
-        for i in range(10000):
+        for i in range(500):
             point = (x_coords[i], y_coords[i])
             if method_name == 'eulers_example':
                 x, y = eulers_example(point, precision)
