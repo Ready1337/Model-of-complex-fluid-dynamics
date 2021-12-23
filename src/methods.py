@@ -1,62 +1,82 @@
+def f_example(x, y):
+    return y
+
+
+def g_example(x, y):
+    return -x
+
+
 def eulers_example(point, precision):
-    x0 = point[0]
-    y0 = point[1]
+    x_m = point[0]
+    y_m = point[1]
+    h = precision
 
-    x = x0 + precision * y0
-    y = y0 + precision * (-x0)
+    x_m_next = x_m + h * f_example(x_m, y_m)
+    y_m_next = y_m + h * g_example(x_m, y_m)
 
-    return x, y
+    return x_m_next, y_m_next
 
 
 def runge_kutta_example(point, precision):
-    x0 = point[0]
-    y0 = point[1]
+    x_m = point[0]
+    y_m = point[1]
+    h = precision
 
-    k1 = precision * y0
-    l1 = precision * (-x0)
+    k1 = h * f_example(x_m, y_m)
+    l1 = h * g_example(x_m, y_m)
 
-    k2 = precision * (y0 + l1/2)
-    l2 = precision * (-x0 - k1/2)
+    k2 = h * f_example(x_m + k1 / 2, y_m + l1 / 2)
+    l2 = h * g_example(x_m + k1 / 2, y_m + l1 / 2)
 
-    k3 = precision * (y0 + l2/2)
-    l3 = precision * (-x0 - k2/2)
+    k3 = h * f_example(x_m + k2 / 2, y_m + l2 / 2)
+    l3 = h * g_example(x_m + k2 / 2, y_m + l2 / 2)
 
-    k4 = precision * (y0 + l3)
-    l4 = precision * (-x0 - k3)
+    k4 = h * f_example(x_m + k3, y_m + l3)
+    l4 = h * g_example(x_m + k3, y_m + l3)
 
-    x = x0 + 1/6 * (k1 + 2*k2 + 2*k3 + k4)
-    y = y0 + 1/6 * (l1 + 2*l2 + 2*l3 + l4)
+    x_m_next = x_m + 1 / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+    y_m_next = y_m + 1 / 6 * (l1 + 2 * l2 + 2 * l3 + l4)
 
-    return x, y
+    return x_m_next, y_m_next
+
+
+def f(x, y):
+    return y
+
+
+def g(x, y, param):
+    return (-x**2 + 3*x - 2) * y - 4*x + 4*param
 
 
 def eulers_model(point, precision, param):
-    x0 = point[0]
-    y0 = point[1]
+    x_m = point[0]
+    y_m = point[1]
+    h = precision
 
-    x = x0 + precision * y0
-    y = y0 + precision * (-(x0**2) + 3*x0 - 2) * y0 - 4*x0 + 4*param
+    x_m_next = x_m + h * f(x_m, y_m)
+    y_m_next = y_m + h * g(x_m, y_m, param)
 
-    return x, y
+    return x_m_next, y_m_next
 
 
 def runge_kutta_model(point, precision, param):
-    x0 = point[0]
-    y0 = point[1]
+    x_m = point[0]
+    y_m = point[1]
+    h = precision
 
-    k1 = precision * y0
-    l1 = precision * (-(x0**2) + 3*x0 - 2) * y0 - 4*x0 + 4*param
+    k1 = h * f(x_m, y_m)
+    l1 = h * g(x_m, y_m, param)
 
-    k2 = precision * (y0 + l1/2)
-    l2 = precision * (-((x0 + k1/2)**2) + 3*(x0 + k1/2) - 2) * (y0 + l1/2) - 4*(x0 +k1/2) + 4*param
+    k2 = h * f(x_m + k1 / 2, y_m + l1 / 2)
+    l2 = h * g(x_m + k1 / 2, y_m + l1 / 2, param)
 
-    k3 = precision * (y0 + l2/2)
-    l3 = precision * (-((x0 + k2/2)**2) + 3*(x0 + k2/2) - 2) * (y0 + l2/2) - 4*(x0 +k2/2) + 4*param
+    k3 = h * f(x_m + k2 / 2, y_m + l2 / 2)
+    l3 = h * g(x_m + k2 / 2, y_m + l2 / 2, param)
 
-    k4 = precision * (y0 + l3)
-    l4 = precision * (-((x0 + k3)**2) + 3*(x0 + k3) - 2) * (y0 + l3) - 4*(x0 +k3) + 4*param
+    k4 = h * f(x_m + k3, y_m + l3)
+    l4 = h * g(x_m + k3, y_m + l3, param)
 
-    x = x0 + 1/6 * (k1 + 2*k2 + 2*k3 + k4)
-    y = y0 + 1/6 * (l1 + 2*l2 + 2*l3 + l4)
+    x_m_next = x_m + 1/6 * (k1 + 2*k2 + 2*k3 + k4)
+    y_m_next = y_m + 1/6 * (l1 + 2*l2 + 2*l3 + l4)
 
-    return x, y
+    return x_m_next, y_m_next
